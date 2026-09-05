@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyStreak - Stay on Track. Build Your Streak. Get Things Done.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1c2ac8;
+            --secondary-blue: #3b49df;
+            --light-blue: #dee8ff;
+            --lighter-blue: #e7eeff;
+            --lightest-blue: #f0f3ff;
+            --orange: #fd651e;
+            --orange-light: #ffdbce;
+            --green: #006b49;
+            --green-light: #6ffbbe;
+            --dark-text: #111c2d;
+            --medium-text: #454655;
+            --light-text: #9ca3af;
+            --background: #f9f9ff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--background);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 48px; line-height: 56px; }
+        h2 { font-size: 32px; line-height: 40px; }
+        h3 { font-size: 24px; line-height: 32px; }
+
+        /* ===== ANNOUNCEMENT BANNER ===== */
+        .announcement {
+            background-color: var(--primary-blue);
+            padding: 8px 16px;
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--orange);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background-color: var(--background);
+            padding: 64px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #dee8ff;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            width: fit-content;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .hero-heading h1 {
+            color: var(--dark-text);
+            margin-bottom: 12px;
+        }
+
+        .hero-heading h1 .highlight {
+            color: var(--secondary-blue);
+        }
+
+        .hero-description {
+            color: var(--medium-text);
+            font-size: 18px;
+            max-width: 576px;
+            line-height: 28px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0px 4px 6px -1px rgba(59, 73, 223, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark-text);
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f5f5;
+        }
+
+        .social-proof {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .avatars {
+            display: flex;
+            gap: -12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid var(--background);
+            margin-left: -12px;
+            flex-shrink: 0;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .rating-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .rating-subtext {
+            font-size: 13px;
+            color: var(--medium-text);
+        }
+
+        .hero-right {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0px 20px 25px -5px rgba(207, 218, 242, 0.4);
+        }
+
+        .dashboard-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--light-blue);
+        }
+
+        .dashboard-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--medium-text);
+            text-transform: uppercase;
+            letter-spacing: 0.55px;
+        }
+
+        .dashboard-title-main {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .dashboard-badges {
+            display: flex;
+            gap: 8px;
+        }
+
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: var(--orange-light);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #370e00;
+        }
+
+        .weekly-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: var(--lighter-blue);
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .progress-bar {
+            background-color: var(--lightest-blue);
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .progress-value {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--green);
+        }
+
+        .bar {
+            height: 12px;
+            background-color: var(--light-blue);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background-color: var(--green-light);
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px 0;
+        }
+
+        .task-item {
+            background-color: white;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .task-item.completed {
+            background-color: var(--lightest-blue);
+        }
+
+        .task-item:hover {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            background-color: var(--light-blue);
+        }
+
+        .task-checkbox.checked {
+            background-color: var(--green);
+        }
+
+        .task-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-left: 12px;
+        }
+
+        .task-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--medium-text);
+        }
+
+        .task-title.completed {
+            text-decoration: line-through;
+            color: var(--medium-text);
+        }
+
+        .task-meta {
+            font-size: 13px;
+            color: var(--medium-text);
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .task-status {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .task-status.completed {
+            background-color: white;
+            color: var(--green);
+        }
+
+        .task-status.pending {
+            background-color: var(--orange-light);
+            color: #7f2b00;
+        }
+
+        .task-footer {
+            background-color: rgba(240, 243, 255, 0.6);
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-footer-item {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .task-footer-value {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* ===== PROGRESS SECTION ===== */
+        .progress-section {
+            background-color: var(--lightest-blue);
+            padding: 48px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background-color: #e0e0ff;
+            color: var(--primary-blue);
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 4px;
+        }
+
+        .section-subtitle {
+            color: var(--medium-text);
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .metric-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .metric-card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 16px;
+        }
+
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .metric-icon.green {
+            background-color: var(--green-light);
+        }
+
+        .metric-icon.orange {
+            background-color: var(--orange-light);
+        }
+
+        .metric-icon.blue {
+            background-color: var(--lighter-blue);
+        }
+
+        .metric-badge {
+            padding: 2px 4px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .metric-badge.green {
+            background-color: rgba(0, 107, 73, 0.1);
+            color: #005036;
+        }
+
+        .metric-badge.orange {
+            background-color: #ffb599;
+            color: #370e00;
+        }
+
+        .metric-badge.blue {
+            background-color: var(--lighter-blue);
+            color: var(--dark-text);
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 4px;
+        }
+
+        .metric-value.orange {
+            color: var(--orange);
+        }
+
+        .metric-value.green {
+            color: var(--green);
+        }
+
+        .metric-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 4px;
+        }
+
+        .metric-desc {
+            font-size: 13px;
+            color: var(--medium-text);
+        }
+
+        /* ===== WEEKLY TRACKER ===== */
+        .weekly-tracker {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: none;
+        }
+
+        .tracker-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--medium-text);
+            text-transform: uppercase;
+            letter-spacing: 0.55px;
+            margin-bottom: 8px;
+        }
+
+        .tracker-title-main {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .tracker-legend {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .legend-item {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.checked {
+            background-color: var(--green);
+        }
+
+        .legend-dot.pending {
+            background-color: var(--light-blue);
+        }
+
+        .day-capsules {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .day-capsule {
+            background-color: var(--lightest-blue);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .day-capsule.active {
+            background-color: var(--lighter-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .day-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--dark-text);
+            text-transform: uppercase;
+            letter-spacing: 0.44px;
+        }
+
+        .day-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background-color: var(--green);
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .day-circle.empty {
+            background-color: var(--light-blue);
+            color: #757687;
+        }
+
+        .day-status {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+            text-transform: capitalize;
+        }
+
+        .day-status.pending {
+            color: var(--medium-text);
+        }
+
+        .motivational-banner {
+            background-color: var(--lighter-blue);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .motivational-text {
+            font-size: 15px;
+            color: var(--dark-text);
+        }
+
+        .motivational-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* ===== ASSIGNMENT FORM SECTION ===== */
+        .form-section {
+            padding: 64px 24px;
+            background-color: white;
+        }
+
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0px 10px 15px -3px rgba(207, 218, 242, 0.3);
+        }
+
+        .form-header {
+            margin-bottom: 24px;
+        }
+
+        .form-tag {
+            display: inline-block;
+            background-color: #e0e0ff;
+            color: var(--primary-blue);
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            margin-bottom: 8px;
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+
+        .form-description {
+            color: var(--medium-text);
+            font-size: 15px;
+            line-height: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+            margin-bottom: 16px;
+        }
+
+        .form-field {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark-text);
+            letter-spacing: 0.13px;
+        }
+
+        .form-input,
+        .form-select {
+            background-color: var(--lightest-blue);
+            border: none;
+            padding: 12px 12px 13px 40px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--dark-text);
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder,
+        .form-select::placeholder {
+            color: var(--light-text);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            background-color: #e0e7ff;
+            box-shadow: 0 0 0 3px rgba(59, 73, 223, 0.1);
+        }
+
+        .form-wrapper {
+            position: relative;
+        }
+
+        .form-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .form-submit {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-submit:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-help {
+            color: var(--medium-text);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .preview-panel {
+            background-color: var(--lighter-blue);
+            padding: 24px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-title {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .preview-status {
+            background-color: white;
+            color: var(--primary-blue);
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .preview-description {
+            color: var(--medium-text);
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .preview-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .preview-item {
+            background-color: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 12px;
+        }
+
+        .preview-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            background-color: var(--lightest-blue);
+            flex-shrink: 0;
+        }
+
+        .preview-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .preview-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .preview-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .preview-badge {
+            background-color: var(--light-blue);
+            color: var(--dark-text);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .quote-card {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-icon {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .quote-text {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 26px;
+            margin-bottom: 12px;
+        }
+
+        .quote-credit {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.65px;
+            color: #bdc2ff;
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials-section {
+            background-color: white;
+            padding: 64px 24px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .star {
+            color: #fbbf24;
+        }
+
+        .testimonial-quote {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+            line-height: 22px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--medium-text);
+            line-height: 24px;
+        }
+
+        .testimonial-author {
+            background-color: var(--lightest-blue);
+            padding: 24px;
+            border-radius: 0 0 16px 16px;
+            margin: 0 -24px -24px -24px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex-shrink: 0;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .author-title {
+            font-size: 13px;
+            color: var(--medium-text);
+        }
+
+        .feedback-button {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background-color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-top: 32px;
+        }
+
+        .feedback-button:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            background-color: var(--lightest-blue);
+            padding: 48px 24px;
+        }
+
+        .faq-container {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .faq-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+
+        .faq-trigger:hover {
+            background-color: #f9f9f9;
+        }
+
+        .faq-trigger.open {
+            background-color: white;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-trigger.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-content {
+            display: none;
+            padding: 16px;
+            border-top: 1px solid var(--light-blue);
+            color: var(--medium-text);
+            font-size: 15px;
+            line-height: 24px;
+        }
+
+        .faq-content.open {
+            display: block;
+        }
+
+        /* ===== STREAK SECTION ===== */
+        .streak-section {
+            background-color: var(--lightest-blue);
+            padding: 64px 24px;
+        }
+
+        .streak-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .streak-card {
+            background-color: white;
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0px 20px 25px -5px rgba(207, 218, 242, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .streak-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #a73a00, var(--orange));
+        }
+
+        .streak-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .streak-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--orange-light);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: #370e00;
+        }
+
+        .streak-heading {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .streak-subtext {
+            font-size: 15px;
+            color: var(--medium-text);
+            line-height: 24px;
+        }
+
+        .streak-freeze {
+            background-color: var(--lighter-blue);
+            padding: 16px 12px;
+            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .streak-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .visual-tracker {
+            background-color: var(--lightest-blue);
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tracker-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .tracker-stat-value {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        .daily-circles {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .circle-label {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--dark-text);
+            margin-bottom: 4px;
+        }
+
+        .circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            background-color: var(--green);
+            color: white;
+        }
+
+        .circle.empty {
+            background-color: var(--light-blue);
+            color: #757687;
+        }
+
+        .progress-meter {
+            background-color: var(--lightest-blue);
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meter-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .meter-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .meter-bar {
+            height: 16px;
+            background-color: var(--light-blue);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background-color: var(--green);
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+        }
+
+        .meter-info {
+            font-size: 13px;
+            color: var(--medium-text);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background-color: white;
+            padding: 48px 24px;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0px 20px 25px -5px rgba(28, 42, 200, 0.2);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .cta-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cta-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: fit-content;
+            letter-spacing: 0.55px;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            line-height: 40px;
+        }
+
+        .cta-description {
+            color: #bdc2ff;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cta-button {
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .cta-button.primary {
+            background-color: var(--orange);
+            color: white;
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button.primary:hover {
+            background-color: #e55a00;
+        }
+
+        .cta-button.secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== NOTIFICATIONS ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .notification.success {
+            background-color: #d1fae5;
+            color: var(--green);
+            border-left: 4px solid var(--green);
+        }
+
+        .notification.error {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-left: 4px solid #dc2626;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-content,
+            .form-container,
+            .streak-content,
+            .cta-card {
+                grid-template-columns: 1fr;
+            }
+
+            h1 { font-size: 32px; line-height: 40px; }
+            h2 { font-size: 24px; line-height: 32px; }
+
+            .day-capsules,
+            .daily-circles {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .metric-cards,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group {
+                flex-direction: column;
+            }
+
+            .form-input,
+            .form-select {
+                padding: 12px 12px 13px 12px;
+            }
+
+            .form-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ANNOUNCEMENT BANNER -->
+    <div class="announcement">
+        <span class="badge">NEW</span>
+        <span>Midterm Season Sprint is live! Sync your syllabus and earn double streak shields.</span>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-tag">
+                        ✨ The Academic Habit Operating System
+                    </div>
+                    <div class="hero-heading">
+                        <h1>Stay on Track.<br><span class="highlight">Build Your Streak.</span><br>Get Things Done.</h1>
+                    </div>
+                    <p class="hero-description">Your assignments, subjects, and daily goals — all in one simple place. Plan your day. Complete your work. Keep your streak going.</p>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary" onclick="scrollToForm()">Start Tracking</button>
+                        <button class="btn btn-secondary">See How It Works</button>
+                    </div>
+                    <div class="social-proof">
+                        <div class="avatars">
+                            <div class="avatar"></div>
+                            <div class="avatar"></div>
+                            <div class="avatar"></div>
+                        </div>
+                        <div>
+                            <div class="rating-text">4.9/5</div>
+                            <div class="rating-subtext">Over 14,000 assignments cleared this week</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="dashboard-preview">
+                        <div class="dashboard-header">
+                            <div>
+                                <div class="dashboard-title">ACTIVE SESSION</div>
+                                <div class="dashboard-title-main">Today's Schedule & Goal</div>
+                            </div>
+                            <div class="dashboard-badges">
+                                <div class="streak-badge">🔥 5 Day Streak</div>
+                                <div class="weekly-badge">70% Weekly</div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress-header">
+                                <span class="progress-label">Weekly Goal Velocity</span>
+                                <span class="progress-value">14 of 20 Completed</span>
+                            </div>
+                            <div class="bar">
+                                <div class="bar-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="task-list" id="dashboardTasks">
+                            <div class="task-item completed">
+                                <div class="task-checkbox checked">✓</div>
+                                <div class="task-content">
+                                    <div class="task-title completed">Mathematics — Complete Algebra Exercises</div>
+                                    <div class="task-meta">📍 Problem Set 4.2 • Calc Ready</div>
+                                </div>
+                                <div class="task-status completed">
+                                    <span style="width: 6px; height: 6px; background-color: #006b49; border-radius: 50%;"></span>
+                                    COMPLETED
+                                </div>
+                            </div>
+
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Physics — Study Chapter 3</div>
+                                    <div class="task-meta">⏰ Due in 2 hours</div>
+                                </div>
+                                <div class="task-status pending">
+                                    <span style="width: 6px; height: 6px; background-color: #fd651e; border-radius: 50%;"></span>
+                                    PENDING
+                                </div>
+                            </div>
+
+                            <div class="task-item">
+                                <div class="task-checkbox"></div>
+                                <div class="task-content">
+                                    <div class="task-title">Computer Science — Finish HTML Assignment</div>
+                                    <div class="task-meta">📅 Due tomorrow • 9:00 AM</div>
+                                </div>
+                                <div class="task-status pending">
+                                    <span style="width: 6px; height: 6px; background-color: #757687; border-radius: 50%;"></span>
+                                    PENDING
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-footer">
+                            <div class="task-footer-item">📊 3 Tasks for Today</div>
+                            <div class="task-footer-item"><span class="task-footer-value">1 Completed</span></div>
+                            <div class="task-footer-item"><span class="task-footer-value" style="color: #fd651e;">2 Remaining</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRESS SECTION -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">PRODUCTIVITY METRICS</div>
+                <h2 class="section-title">Every Completed Task Is Progress.</h2>
+                <p class="section-subtitle">Small wins add up. Stay consistent and watch your progress grow.</p>
+            </div>
+
+            <div class="metric-cards">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon green">✓</div>
+                        <div class="metric-badge green">+3</div>
+                    </div>
+                    <div class="metric-value">7</div>
+                    <div class="metric-label">Assignments Completed</div>
+                    <div class="metric-desc">+3 cleared since yesterday afternoon</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon orange">🔥</div>
+                        <div class="metric-badge orange">Top 5%</div>
+                    </div>
+                    <div class="metric-value orange">5 <span style="font-size: 20px;">Days</span></div>
+                    <div class="metric-label">Daily Streak</div>
+                    <div class="metric-desc">All-time record: 12 days continuous</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon blue">📅</div>
+                        <div class="metric-badge blue">Tomorrow</div>
+                    </div>
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Tasks Planned</div>
+                    <div class="metric-desc">Locked and prepped for tomorrow morning</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon blue">📊</div>
+                        <div class="metric-badge blue" style="background-color: #6ffbbe; color: #005036;">Target Met</div>
+                    </div>
+                    <div class="metric-value green">85%</div>
+                    <div class="metric-label">Weekly Completion</div>
+                    <div class="metric-desc">On schedule for Dean's List honor pace</div>
+                </div>
+            </div>
+
+            <div class="weekly-tracker">
+                <div class="tracker-header">
+                    <div>
+                        <div class="tracker-title">CONSISTENCY MATRIX</div>
+                        <h3 class="tracker-title-main">This Week's Follow-Through</h3>
+                    </div>
+                    <div class="tracker-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot checked"></div>
+                            Checked
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot pending"></div>
+                            Upcoming
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-capsules">
+                    <div class="day-capsule">
+                        <div class="day-label">MON</div>
+                        <div class="day-circle">✓</div>
+                        <div class="day-status">Done</div>
+                    </div>
+                    <div class="day-capsule">
+                        <div class="day-label">TUE</div>
+                        <div class="day-circle">✓</div>
+                        <div class="day-status">Done</div>
+                    </div>
+                    <div class="day-capsule">
+                        <div class="day-label">WED</div>
+                        <div class="day-circle">✓</div>
+                        <div class="day-status">Done</div>
+                    </div>
+                    <div class="day-capsule">
+                        <div class="day-label">THU</div>
+                        <div class="day-circle">✓</div>
+                        <div class="day-status">Done</div>
+                    </div>
+                    <div class="day-capsule active">
+                        <div class="day-label">FRI • TODAY</div>
+                        <div class="day-circle">✓</div>
+                        <div class="day-status">Secured</div>
+                    </div>
+                    <div class="day-capsule">
+                        <div class="day-label">SAT</div>
+                        <div class="day-circle empty">?</div>
+                        <div class="day-status pending">Planned</div>
+                    </div>
+                    <div class="day-capsule">
+                        <div class="day-label">SUN</div>
+                        <div class="day-circle empty">?</div>
+                        <div class="day-status pending">Upcoming</div>
+                    </div>
+                </div>
+
+                <div class="motivational-banner">
+                    <div class="motivational-text"><strong>Small wins add up.</strong> Stay consistent and watch your semester trajectory flip.</div>
+                    <a href="#" class="motivational-link">Schedule Next Block →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAK SECTION -->
+    <section class="streak-section">
+        <div class="streak-container">
+            <div class="section-header">
+                <div class="section-tag" style="background-color: #ffdbce; color: #fd651e;">MOMENTUM & HABITS</div>
+                <h2 class="section-title">Keep Your Streak Alive 🔥</h2>
+                <p class="section-subtitle">You're building an unstoppable habit, not just finishing assignments.</p>
+            </div>
+
+            <div class="streak-card">
+                <div class="streak-top-bar"></div>
+                <div class="streak-content">
+                    <div class="streak-left">
+                        <div class="streak-badge">🔥 5 Day Streak</div>
+                        <div class="streak-heading">🔥 Level 3</div>
+                        <div class="streak-subtext">
+                            You're on fire! <strong>2 days</strong> until your 7-day milestone badge and bronze streak ring.
+                        </div>
+                        <div class="streak-freeze">
+                            <span style="font-size: 16px;">✓</span>
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; color: var(--dark-text);">Streak Freeze Active — 1 grace day enabled</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="streak-right">
+                        <div class="visual-tracker">
+                            <div class="tracker-stat">
+                                <span>Active 7-Day Cycle</span>
+                                <span class="tracker-stat-value">5 of 7 Completed</span>
+                            </div>
+                            <div class="daily-circles">
+                                <div class="circle-label">M</div>
+                                <div class="circle-label">T</div>
+                                <div class="circle-label">W</div>
+                                <div class="circle-label">T</div>
+                                <div class="circle-label">F</div>
+                                <div class="circle-label">S</div>
+                                <div class="circle-label">S</div>
+                            </div>
+                            <div class="daily-circles">
+                                <div class="circle">🟢</div>
+                                <div class="circle">🟢</div>
+                                <div class="circle">🟢</div>
+                                <div class="circle">🟢</div>
+                                <div class="circle">🟢</div>
+                                <div class="circle empty">⚪</div>
+                                <div class="circle empty">⚪</div>
+                            </div>
+                        </div>
+
+                        <div class="progress-meter">
+                            <div class="meter-header">
+                                <span class="meter-label">17 / 20 Assignments Completed</span>
+                                <span class="meter-value">85% Weekly</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="meter-info">Exceeding standard semester pace by 2.4 study sessions per week.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASSIGNMENT FORM SECTION -->
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-card">
+                    <div class="form-header">
+                        <div class="form-tag">NEXT-DAY PLANNING</div>
+                        <h2 class="form-title">Ready to Take Control of Your Study Day?</h2>
+                        <p class="form-description">Eliminate morning decision fatigue. Lock in your syllabus tasks today.</p>
+                    </div>
+
+                    <form class="form-actions" id="assignmentForm">
+                        <div class="form-group">
+                            <div class="form-field">
+                                <label class="form-label">Student Name</label>
+                                <div class="form-wrapper">
+                                    <input type="text" class="form-input" id="studentName" placeholder="Alex Morgan" required>
+                                    <span class="form-icon">👤</span>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Email Address</label>
+                                <div class="form-wrapper">
+                                    <input type="email" class="form-input" id="studentEmail" placeholder="alex.morgan@university.edu" required>
+                                    <span class="form-icon">✉️</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <div class="form-field" style="width: 100%;">
+                                <label class="form-label">Assignment or Objective</label>
+                                <div class="form-wrapper">
+                                    <input type="text" class="form-input" id="assignmentName" placeholder="Chapter 4 Problem Set & Summary Notes" required>
+                                    <span class="form-icon">📝</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-field">
+                                <label class="form-label">Academic Subject</label>
+                                <div class="form-wrapper">
+                                    <select class="form-select" id="subject" required>
+                                        <option value="">Select Subject</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="Biology">Biology</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="English">English</option>
+                                        <option value="History">History</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="form-icon">🔬</span>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Timeline • Days to Complete</label>
+                                <div class="form-wrapper">
+                                    <select class="form-select" id="daysToComplete" required>
+                                        <option value="">Select Timeline</option>
+                                        <option value="1">1 Day (Due Tomorrow)</option>
+                                        <option value="2">2 Days</option>
+                                        <option value="3">3 Days</option>
+                                        <option value="5">5 Days</option>
+                                        <option value="7">1 Week</option>
+                                        <option value="14">2 Weeks</option>
+                                    </select>
+                                    <span class="form-icon">📅</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="form-submit" style="width: 100%;">
+                            ➕ Start My Study Plan
+                        </button>
+                        <p class="form-help">One step closer to a more organized, low-stress study routine.</p>
+                    </form>
+                </div>
+
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <div class="preview-title">
+                            📋 Live Plan Preview
+                        </div>
+                        <div class="preview-status">Sync Ready</div>
+                    </div>
+
+                    <div class="preview-description">
+                        Tasks added here automatically map into streak checkpoints and daily accountability reminders:
+                    </div>
+
+                    <div class="preview-items" id="livePreview">
+                        <div class="preview-item">
+                            <div class="preview-checkbox"></div>
+                            <div class="preview-details">
+                                <div class="preview-item-title">Your assignments appear here</div>
+                                <div class="preview-meta">
+                                    <span class="preview-badge">Subject</span>
+                                    <span style="color: var(--medium-text);">• Timeline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background-color: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 12px; display: flex; gap: 8px; align-items: center;">
+                        <span style="font-size: 14px;">✓</span>
+                        <div style="font-size: 13px; color: var(--medium-text);">
+                            <strong style="color: var(--dark-text);">Automated digest</strong> delivered to your email at <strong>7:30 AM</strong> to kick off your flow state.
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <div class="quote-icon">❝</div>
+                        <div class="quote-text">"Action precedes motivation. Put the task on the board, and the momentum will follow."</div>
+                        <div class="quote-credit">STUDYSTREAK PHILOSOPHY • VOL. 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">STUDENT STORIES</div>
+                <h2 class="section-title">Students Are Getting More Done, One Day at a Time.</h2>
+                <p class="section-subtitle">From secondary school to competitive graduate programs, consistency compounds.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="star-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-quote">"I finally know what I need to finish each day."</div>
+                        <div class="testimonial-text">
+                            Before StudyStreak, I had seven different to-do lists and missed assignment windows. The streak mechanic turned my chaotic evenings into a predictable, low-anxiety sprint.
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Maya L.</div>
+                            <div class="author-title">Computer Science Sophomore • Stanford</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="star-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-quote">"Seeing my streak grow motivates me to complete my assignments."</div>
+                        <div class="testimonial-text">
+                            Pre-med workloads are brutal. The psychological nudge of protecting my 24-day streak gets me over the initial wall of opening organic chemistry problem sets every single night.
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Liam K.</div>
+                            <div class="author-title">Pre-Med Junior • University of Michigan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="star-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="testimonial-quote">"It's easier to plan my next day when I can see what I've already finished."</div>
+                        <div class="testimonial-text">
+                            Balancing five AP courses was overwhelming until I started evening planning. Entering tomorrow's goals takes 3 minutes and guarantees I wake up focused on the hardest task first.
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <div class="author-name">Priya S.</div>
+                            <div class="author-title">High School Senior • AP Scholar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="feedback-button">
+                    💬 Share Your Feedback
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="section-header">
+                <div class="section-tag">FREQUENTLY ASKED QUESTIONS</div>
+                <h2 class="section-title">Everything You Need to Know About StudyStreak</h2>
+                <p class="section-subtitle">Clear answers on streaks, planning mechanics, and getting set up.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">
+                        What can I track?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-content">
+                        You can track homework assignments, reading chapters, lab reports, exam study sessions, and daily recurring review tasks across all your academic subjects. You can also define custom elective blocks or test-prep sprints.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">
+                        How does the streak work?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-content">
+                        Your streak increases by 1 each day you mark at least one scheduled assignment or study task as completed before midnight. If you need an emergency rest day, you can deploy a "Streak Freeze" without losing your momentum tally.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">
+                        Can I plan my next day?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-content">
+                        Yes! StudyStreak is deliberately architected around evening planning. Add assignments and set your priorities the night before so you wake up with total clarity, zero procrastination, and immediate momentum.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">
+                        What information do I need to get started?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-content">
+                        Just your name, email, and your current coursework or syllabus. You can start organizing your first study plan in less than 60 seconds with no complex configuration or third-party plugins needed.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">
+                        What happens when I complete an assignment?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-content">
+                        Marking an assignment complete immediately updates your daily progress percentage, increments your weekly stats, unlocks milestone badges, and secures your streak for the day.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-left">
+                    <div class="cta-tag">START FREE • NO CREDIT CARD REQUIRED</div>
+                    <h2 class="cta-title">Build Your First 7-Day Streak Starting Today.</h2>
+                    <p class="cta-description">Join thousands of students who traded last-minute cramming for steady, daily academic victories.</p>
+                </div>
+                <div class="cta-buttons">
+                    <button class="cta-button primary">Claim My Streak</button>
+                    <button class="cta-button secondary">Explore Features</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKOtAeccCl1TN8WI4LjHthRqf0qCfE163orXH8vQ0RcNLmJvEYcOJyHVaBrOgm5-elLA/exec';
+        const STORAGE_KEY = 'studystreak_assignments';
+
+        // Assignment data model
+        let assignments = [];
+        let streak = 0;
+        let completedToday = 0;
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAssignmentsFromStorage();
+            updateAllUI();
+            setupFormListener();
+            setupFaqListeners();
+        });
+
+        // Form submission
+        function setupFormListener() {
+            const form = document.getElementById('assignmentForm');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('studentName').value.trim();
+                    const assignment = document.getElementById('assignmentName').value.trim();
+                    const subject = document.getElementById('subject').value;
+                    const days = document.getElementById('daysToComplete').value;
+
+                    if (!name || !assignment || !subject || !days) {
+                        showNotification('Please fill in all fields', 'error');
+                        return;
+                    }
+
+                    // Disable button
+                    const submitBtn = form.querySelector('.form-submit');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = '⏳ Saving...';
+
+                    // Send to Google Sheets
+                    try {
+                        const url = SCRIPT_URL + '?' + new URLSearchParams({
+                            name: name,
+                            assignment: assignment,
+                            subject: subject,
+                            days: days
+                        });
+
+                        await fetch(url, {
+                            method: 'GET',
+                            mode: 'no-cors'
+                        });
+
+                        // Add to local storage
+                        const newAssignment = {
+                            id: Date.now(),
+                            name: name,
+                            assignment: assignment,
+                            subject: subject,
+                            days: parseInt(days),
+                            completed: false,
+                            dateAdded: new Date().toISOString()
+                        };
+
+                        assignments.push(newAssignment);
+                        saveAssignmentsToStorage();
+                        updateAllUI();
+
+                        // Reset form
+                        form.reset();
+                        showNotification('✓ Assignment added to your study plan!', 'success');
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        showNotification('Error saving assignment. Please try again.', 'error');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '➕ Start My Study Plan';
+                    }
+                });
+            }
+        }
+
+        // Load from localStorage
+        function loadAssignmentsFromStorage() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    assignments = JSON.parse(stored);
+                } else {
+                    assignments = [];
+                }
+            } catch (e) {
+                console.error('Error loading from storage:', e);
+                assignments = [];
+            }
+        }
+
+        // Save to localStorage
+        function saveAssignmentsToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(assignments));
+            } catch (e) {
+                console.error('Error saving to storage:', e);
+            }
+        }
+
+        // Toggle assignment completion
+        function toggleAssignment(id) {
+            const assignment = assignments.find(a => a.id === id);
+            if (assignment) {
+                assignment.completed = !assignment.completed;
+                saveAssignmentsToStorage();
+                updateAllUI();
+            }
+        }
+
+        // Delete assignment
+        function deleteAssignment(id) {
+            assignments = assignments.filter(a => a.id !== id);
+            saveAssignmentsToStorage();
+            updateAllUI();
+        }
+
+        // Update all UI
+        function updateAllUI() {
+            updateDashboardTasks();
+            updateLivePreview();
+            calculateMetrics();
+        }
+
+        // Update dashboard preview
+        function updateDashboardTasks() {
+            const container = document.getElementById('dashboardTasks');
+            if (!container) return;
+
+            // Clear and rebuild
+            container.innerHTML = '';
+
+            if (assignments.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--medium-text);">No assignments yet. Add your first one!</div>';
+                return;
+            }
+
+            assignments.forEach(assignment => {
+                const taskHTML = `
+                    <div class="task-item ${assignment.completed ? 'completed' : ''}">
+                        <div class="task-checkbox ${assignment.completed ? 'checked' : ''}" onclick="toggleAssignment(${assignment.id})" style="cursor: pointer;">
+                            ${assignment.completed ? '✓' : ''}
+                        </div>
+                        <div class="task-content">
+                            <div class="task-title ${assignment.completed ? 'completed' : ''}">${assignment.subject} — ${assignment.assignment}</div>
+                            <div class="task-meta">📍 ${assignment.days} day${assignment.days > 1 ? 's' : ''} to complete</div>
+                        </div>
+                        <div class="task-status ${assignment.completed ? 'completed' : 'pending'}">
+                            <span style="width: 6px; height: 6px; background-color: ${assignment.completed ? '#006b49' : '#fd651e'}; border-radius: 50%;"></span>
+                            ${assignment.completed ? 'COMPLETED' : 'PENDING'}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += taskHTML;
+            });
+        }
+
+        // Update live preview
+        function updateLivePreview() {
+            const container = document.getElementById('livePreview');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (assignments.length === 0) {
+                container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--medium-text);">Your assignments will appear here when you submit the form.</div>';
+                return;
+            }
+
+            assignments.forEach(assignment => {
+                const previewHTML = `
+                    <div class="preview-item">
+                        <div class="preview-checkbox ${assignment.completed ? 'checked' : ''}" style="${assignment.completed ? 'background-color: var(--green);' : ''}"></div>
+                        <div class="preview-details">
+                            <div class="preview-item-title">${assignment.assignment}</div>
+                            <div class="preview-meta">
+                                <span class="preview-badge">${assignment.subject}</span>
+                                <span style="color: var(--medium-text);">• Due in ${assignment.days} day${assignment.days > 1 ? 's' : ''}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += previewHTML;
+            });
+        }
+
+        // Calculate and update metrics
+        function calculateMetrics() {
+            completedToday = assignments.filter(a => a.completed).length;
+            const total = assignments.length || 1;
+            const completionRate = Math.round((completedToday / total) * 100);
+
+            // Update progress bar
+            const bars = document.querySelectorAll('.bar-fill, .meter-fill');
+            bars.forEach(bar => {
+                bar.style.width = completionRate + '%';
+            });
+
+            // Calculate streak (simple implementation)
+            streak = completedToday > 0 ? 5 : 0;
+
+            // Update streak badge
+            const streakBadges = document.querySelectorAll('.streak-badge, .weekly-badge');
+            if (streakBadges.length > 0) {
+                streakBadges[0].textContent = `🔥 ${streak} Day Streak`;
+            }
+        }
+
+        // Toggle FAQ items
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const isOpen = content.classList.contains('open');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-content.open').forEach(item => {
+                if (item !== content) {
+                    item.classList.remove('open');
+                    item.previousElementSibling.classList.remove('open');
+                }
+            });
+
+            // Toggle this one
+            button.classList.toggle('open');
+            content.classList.toggle('open');
+        }
+
+        function setupFaqListeners() {
+            const faqTriggers = document.querySelectorAll('.faq-trigger');
+            faqTriggers.forEach((trigger, index) => {
+                if (index === 0) {
+                    trigger.classList.add('open');
+                    trigger.nextElementSibling.classList.add('open');
+                }
+            });
+        }
+
+        // Scroll to form
+        function scrollToForm() {
+            const formSection = document.querySelector('.form-section');
+            if (formSection) {
+                formSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
